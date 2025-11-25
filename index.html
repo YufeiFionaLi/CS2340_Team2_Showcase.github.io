@@ -7,37 +7,48 @@
         </h1>
         <p>
             This project is called "Spendwise". It is an android app meant to help
-            with expense tracking  and budgeting for users. It allows a collaborative tool
-            by allowing users to set spending goals with their friends that they are able to add. 
-            It also integrates ai by allowing the user to chat with an ai chatbot
-            that gives it advice, albeit not legal financial advice. It allows users
-            to set budget goals, track expenses, and how that affects their budget goals.
-            The chatbot can then help them decide how they can improve their expense tracking.
-
+            with expense tracking and budgeting for users. Users can create monthly or 
+            weekly budgets that automatically roll over for their given period, add expenses
+            that are directly linked to those budget categories, and recieve visual insights on their
+            spending habits and how well they're sticking to their budgets via charts displayed on their
+            dashboard. Users recieve notifications when they're close to their budget limits and SpendWise 
+            tracks when a user has been inactive in logging expenses and prompts them to make sure they're
+            staying on top of their goals. Beyond just personal savings tracking, SpendWise is a collaborative tool that 
+            allows users to connect with their friends on the app to set savings goals together. 
+            SpendWise also has an integrated AI financial assistant chatbot that allows users
+            to recieve personalized savings advice, thorough expense reports, and detailed guidance
+            on how to manage budgets that they've almost used up to get by before they reach the end of
+            that period.
         </p>
         <h1>
             Architecture
         </h1>
         <img src = "dcdnew.png" alt = "dcd">
         <p1>
-            Above is a DCD diagram of our project. We implement several 
-            design patterns. The architecture that we follow is 
-            MVVM. We have separate models, view models, and views. Views deal with
+            Above is a DCD diagram of a portion of our project. The architecture that we follow is 
+            MVVM. We have separate models, view models, and views (not displayed in the DCD above). Views deal with
             everything that is ui related. Models represented 
-            how we handled objects and other classes
-            that stored data which connected to the backend. View model connected both by
-            exposing live data to the view. As shown in our
+            how we handled the backend/business logic of our class. 
+            The view models served as a connection between both by exposing live data to the view. As shown in our
             diagram, we had several models such as for example, budget, expense, firebase-repository
-            class which handled backend data and objects. We had allf of our activities
-            which represented pages in activities such as 
-            chatbot activity, dashboard activity, etc. Our viewmodels
-            such as chatbotviewmodel, dashboardviewmodel, helped with
-            getting the data for display on the view pages. 
-            We also used different design patterns. 
-            One such pattern we implement is the observer pattern
-            which notifies viewmodels when spendviewcalculator completes budget calculations. 
-            We also implement the decorator pattern which is used to add features to dialog objects
-            without changing their structure. This then helps us customize our popups.
+            class which handled backend data and objects. The activities managed the user interaction for each active screen 
+            (e.g. chatbot activity, dashboard activity, etc) as well as all input forms and popups. 
+            Our viewmodels, such as chatbotviewmodel and dashboardviewmodel, helped with
+            getting the data to display on the view pages (e.g. fetching the updated data for the visualization
+            charts on our homepage). 
+            We implemented several design patterns, though not all of them are represented in the DCD above.
+            In particular we showcased the singleton pattern, strategy pattern, factory pattern, observer pattern,
+            and the decorator pattern. Our singleton FirebaseRepository manages our database repository in order to store
+            a user's information and update it during their app session. Our strategy pattern was used to allow users to sort the
+            list of displayed budgets and expenses on their respective tabs by ascending and descending date while ensuring that
+            adding new sorting methods does not violate the open-closed principle, simply requiring the developer to implement our SortingMethod
+            interface and add the new method as an enum option to be displayed in the dropdown for sorting methods. Our factory pattern is used
+            for the creation of the charts on the user's dashboard. Both PieChart and BarChart are created with the ChartFactory which means the creator
+            is not explicitly aware of what specifically it's creating.
+            Our observer handles notifying the viewmodels when our SpendViewCalculator completes recomputing budget calculations.
+            This allows all of our pages to update their data in real time as new budgets, expenses, and savings groups are made.
+            We used the decorator pattern to add features to dialog objects without changing their structure. 
+            This then helps us customize our popups, adding navigation buttons, borders, and alert sounds.
         </p1>
     </body>
 </html>
